@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import com.andrey7mel.test_app.model.Model;
 import com.andrey7mel.test_app.other.App;
+import com.andrey7mel.test_app.view.Message;
 import com.andrey7mel.test_app.view.View;
 
 import javax.inject.Inject;
@@ -22,6 +23,7 @@ public class PresenterImpl implements Presenter {
     @Override
     public void clickEnter(String text) {
         model.getAnswer(text);
+        view.showMessage(new Message(text, Message.TYPE.USER));
     }
 
     @Override
