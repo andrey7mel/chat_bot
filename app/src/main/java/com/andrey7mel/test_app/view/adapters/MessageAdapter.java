@@ -12,7 +12,7 @@ import com.andrey7mel.test_app.view.Message;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHolder> {
+public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.TextViewHolder> {
 
     private List<Message> list = new ArrayList<>();
 
@@ -24,19 +24,38 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         this.list = list;
     }
 
+    private static final int VIEW_TYPE_LEFT = 0;
+    private static final int VIEW_TYPE_RIGHT = 1;
+
+
+
     public void showMessage(Message message) {
         list.add(message);
         notifyDataSetChanged();
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.text_item_layout, viewGroup, false);
-        return new ViewHolder(v);
+    public TextViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+
+        int res;
+        switch (viewType) {
+            case VIEW_TYPE_LEFT:
+                res = R.layout.text_item_layout_left;
+                break;
+            case VIEW_TYPE_RIGHT:
+                res = R.layout.text_item_layout_right;
+                break;
+            default:
+                res = R.layout.text_item_layout_right;
+                break;
+        }
+
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(res, viewGroup, false);
+        return new TextViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(MessageAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(TextViewHolder holder, int position) {
         String text = list.get(position).getText();
         holder.text.setText(text);
     }
@@ -47,10 +66,22 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         return list.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    @Override
+    public int getItemViewType(int position) {
+        switch (list.get(position).getType()) {
+            case BOT:
+                return VIEW_TYPE_LEFT;
+            case USER:
+                return VIEW_TYPE_RIGHT;
+            default:
+                return VIEW_TYPE_LEFT;
+        }
+    }
+
+    class TextViewHolder extends RecyclerView.ViewHolder {
         TextView text;
 
-        public ViewHolder(View itemView) {
+        public TextViewHolder(View itemView) {
             super(itemView);
             text = (TextView) itemView.findViewById(R.id.textView);
         }

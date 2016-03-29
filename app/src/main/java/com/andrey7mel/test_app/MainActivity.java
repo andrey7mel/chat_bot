@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.TextView;
 
 import com.andrey7mel.test_app.other.App;
 import com.andrey7mel.test_app.presenter.Presenter;
@@ -17,6 +18,7 @@ import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 
 public class MainActivity extends AppCompatActivity implements View {
@@ -25,6 +27,15 @@ public class MainActivity extends AppCompatActivity implements View {
 
     @Bind(R.id.recycler_view)
     RecyclerView recyclerView;
+
+    @Bind(R.id.edit_text)
+    TextView textView;
+
+    @OnClick(R.id.button)
+    void onClick() {
+       if(textView.getText().length() > 0)
+           presenter.clickEnter(textView.getText().toString());
+    }
 
     @Inject
     Presenter presenter;
@@ -42,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements View {
         LinearLayoutManager llm = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(llm);
         recyclerView.setAdapter(adapter);
+
     }
 
     @Override
@@ -53,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements View {
     @Override
     public void showMessage(Message message) {
         adapter.showMessage(message);
+        recyclerView.smoothScrollToPosition(adapter.getItemCount()-1);
     }
 
     @Override
