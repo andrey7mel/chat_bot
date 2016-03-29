@@ -37,6 +37,6 @@ public class ModelImpl implements Model {
 
     @Override
     public Observable<Message> getAnswer(String in) {
-        return null;
+        return Observable.just(new Message(in.length() + " букв(ы)!", Message.TYPE.BOT));
     }
 }

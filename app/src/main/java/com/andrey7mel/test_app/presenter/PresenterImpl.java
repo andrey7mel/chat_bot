@@ -22,8 +22,8 @@ public class PresenterImpl implements Presenter {
 
     @Override
     public void clickEnter(String text) {
-        model.getAnswer(text);
         view.showMessage(new Message(text, Message.TYPE.USER));
+        model.getAnswer(text).subscribe(view::showMessage);
     }
 
     @Override

@@ -47,12 +47,23 @@ public class PresenterImplTest extends BaseTest {
 
     @Test
     public void testClickEnter() {
+        mockModelGetAnswer();
         presenter.onCreate(view, null);
         presenter.clickEnter(TestConst.TEST_INPUT);
+
         verify(model).getAnswer(TestConst.TEST_INPUT);
         verify(view).showMessage(argument.capture());
 
-        assertEquals(TestConst.TEST_INPUT, argument.getValue().getText());
+        assertEquals(3, argument.getAllValues().size());
+        assertEquals(TestConst.TEST_INPUT, argument.getAllValues().get(0).getText());
+        assertEquals(Message.TYPE.USER, argument.getAllValues().get(0).getType());
+
+        assertEquals(TestConst.TEST_ANSWER1, argument.getAllValues().get(1).getText());
+        assertEquals(Message.TYPE.BOT, argument.getAllValues().get(1).getType());
+
+        assertEquals(TestConst.TEST_ANSWER2, argument.getAllValues().get(2).getText());
+        assertEquals(Message.TYPE.BOT, argument.getAllValues().get(2).getType());
+
     }
 
     @Test
@@ -64,16 +75,20 @@ public class PresenterImplTest extends BaseTest {
 
     @Test
     public void testOnStartWithoutHistory() {
-        mockModelAnswer();
+        mockModelGetMessages();
         presenter.onCreate(view, null);
         presenter.onStart();
-        mockModelAnswer();
+        mockModelGetMessages();
 
         verify(view, times(2)).showMessage(argument.capture());
-
         assertEquals(2, argument.getAllValues().size());
+
         assertEquals(TestConst.TEST_ANSWER1, argument.getAllValues().get(0).getText());
+        assertEquals(Message.TYPE.BOT, argument.getAllValues().get(0).getType());
+
         assertEquals(TestConst.TEST_ANSWER2, argument.getAllValues().get(1).getText());
+        assertEquals(Message.TYPE.BOT, argument.getAllValues().get(1).getType());
+
     }
 
     @Test
@@ -81,7 +96,7 @@ public class PresenterImplTest extends BaseTest {
 
     }
 
-    private void mockModelAnswer() {
+    private void mockModelGetMessages() {
         ArrayList<Message> list = new ArrayList<>();
         list.add(new Message(TestConst.TEST_ANSWER1, Message.TYPE.BOT));
         list.add(new Message(TestConst.TEST_ANSWER2, Message.TYPE.BOT));
@@ -90,4 +105,17 @@ public class PresenterImplTest extends BaseTest {
                 .getMessages();
 
     }
+
+    private void mockModelGetAnswer() {
+        ArrayList<Message> list = new ArrayList<>();
+        list.add(new Message(TestConst.TEST_ANSWER1, Message.TYPE.BOT));
+        list.add(new Message(TestConst.TEST_ANSWER2, Message.TYPE.BOT));
+        doAnswer(invocation -> Observable.from(list))
+                .when(model)
+                .getAnswer(TestConst.TEST_INPUT);
+
+    }
+
+
+
 }
