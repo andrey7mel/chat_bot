@@ -1,5 +1,7 @@
 package com.andrey7mel.test_app.other.di;
 
+import com.andrey7mel.test_app.model.Model;
+import com.andrey7mel.test_app.model.ModelImpl;
 import com.andrey7mel.test_app.other.Const;
 
 import javax.inject.Named;
@@ -26,6 +28,12 @@ public class AppModule {
     @Named(Const.IO_THREAD)
     Scheduler provideSchedulerIO() {
         return Schedulers.io();
+    }
+
+    @Provides
+    @Singleton
+    Model provideApiInterface() {
+        return new ModelImpl();
     }
 
 }

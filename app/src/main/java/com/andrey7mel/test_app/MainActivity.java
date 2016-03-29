@@ -12,6 +12,7 @@ import com.andrey7mel.test_app.view.adapters.MessageAdapter;
 import java.util.List;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 
 
 public class MainActivity extends AppCompatActivity implements View {
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements View {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
         adapter = new MessageAdapter();
 
         LinearLayoutManager llm = new LinearLayoutManager(this);

@@ -4,6 +4,8 @@ package com.andrey7mel.test_app.other;
 import com.andrey7mel.test_app.BuildConfig;
 import com.andrey7mel.test_app.other.di.TestComponent;
 
+import junit.framework.Assert;
+
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.runner.RunWith;
@@ -15,7 +17,7 @@ import org.robolectric.annotation.Config;
         constants = BuildConfig.class,
         sdk = 21)
 @Ignore
-public class BaseTest {
+public class BaseTest extends Assert {
 
     public TestComponent component;
     public TestUtils testUtils;

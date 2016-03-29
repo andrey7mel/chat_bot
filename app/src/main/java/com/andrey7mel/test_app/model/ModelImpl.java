@@ -21,12 +21,6 @@ public class ModelImpl implements Model {
     @Named(Const.IO_THREAD)
     Scheduler ioThread;
 
-    @Inject
-    public ModelImpl() {
-    }
-
-
-
     @Override
     public Observable<List<Message>> getHistory() {
         return null;
