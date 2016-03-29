@@ -30,4 +30,9 @@ public class ModelImpl implements Model {
     public Observable<Message> getMessages() {
         return null;
     }
+
+    @Override
+    public Observable<Message> getAnswer(String in) {
+        return null;
+    }
 }

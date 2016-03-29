@@ -1,16 +1,16 @@
 package com.andrey7mel.test_app.presenter;
 
 import android.os.Bundle;
-import android.view.View;
 
 import com.andrey7mel.test_app.model.Model;
 import com.andrey7mel.test_app.other.App;
+import com.andrey7mel.test_app.view.View;
 
 import javax.inject.Inject;
 
 public class PresenterImpl implements Presenter {
 
-    private View view;
+    protected View view;
 
     @Inject
     Model model;
@@ -21,12 +21,12 @@ public class PresenterImpl implements Presenter {
 
     @Override
     public void clickEnter(String text) {
-
+        model.getAnswer(text);
     }
 
     @Override
     public void onCreate(View view, Bundle state) {
-
+        this.view = view;
     }
 
     @Override

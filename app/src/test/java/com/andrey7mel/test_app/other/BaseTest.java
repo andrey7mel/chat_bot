@@ -23,7 +23,7 @@ public class BaseTest extends Assert {
     public TestUtils testUtils;
 
     @Before
-    public void setUp() throws Exception {
+    public void prepare() {
         component = (TestComponent) App.getComponent();
         testUtils = new TestUtils();
     }

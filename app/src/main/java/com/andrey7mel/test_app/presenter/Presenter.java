@@ -1,7 +1,8 @@
 package com.andrey7mel.test_app.presenter;
 
 import android.os.Bundle;
-import android.view.View;
+
+import com.andrey7mel.test_app.view.View;
 
 public interface Presenter {
     void clickEnter(String text);

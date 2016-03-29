@@ -12,4 +12,7 @@ public interface Model {
 
     Observable<Message> getMessages();
 
+    Observable<Message> getAnswer(String in);
+
+
 }
