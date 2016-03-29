@@ -3,6 +3,7 @@ package com.andrey7mel.test_app.model;
 import com.andrey7mel.test_app.other.Const;
 import com.andrey7mel.test_app.view.Message;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -28,7 +29,10 @@ public class ModelImpl implements Model {
 
     @Override
     public Observable<Message> getMessages() {
-        return null;
+        ArrayList<Message> list = new ArrayList<>();
+        list.add(new Message("Привет!", Message.TYPE.BOT));
+        list.add(new Message("Рад тебя видеть снова!", Message.TYPE.BOT));
+        return Observable.from(list);
     }
 
     @Override

@@ -3,6 +3,8 @@ package com.andrey7mel.test_app.other.di;
 import com.andrey7mel.test_app.model.Model;
 import com.andrey7mel.test_app.model.ModelImpl;
 import com.andrey7mel.test_app.other.Const;
+import com.andrey7mel.test_app.presenter.Presenter;
+import com.andrey7mel.test_app.presenter.PresenterImpl;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -34,6 +36,12 @@ public class AppModule {
     @Singleton
     Model provideApiInterface() {
         return new ModelImpl();
+    }
+
+    @Provides
+    @Singleton
+    Presenter providePresenter() {
+        return new PresenterImpl();
     }
 
 }

@@ -1,5 +1,6 @@
 package com.andrey7mel.test_app.other.di;
 
+import com.andrey7mel.test_app.MainActivityTest;
 import com.andrey7mel.test_app.presenter.PresenterImplTest;
 
 import javax.inject.Singleton;
@@ -11,4 +12,7 @@ import dagger.Component;
 public interface TestComponent extends AppComponent {
 
     void inject(PresenterImplTest presenterImplTest);
+
+    void inject(MainActivityTest mainActivityTest);
+
 }
