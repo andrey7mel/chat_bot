@@ -18,6 +18,7 @@ import rx.Observable;
 
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 public class PresenterImplTest extends BaseTest {
@@ -63,7 +64,16 @@ public class PresenterImplTest extends BaseTest {
 
     @Test
     public void testOnStartWithoutHistory() {
+        mockModelAnswer();
+        presenter.onCreate(view, null);
+        presenter.onStart();
+        mockModelAnswer();
 
+        verify(view, times(2)).showMessage(argument.capture());
+
+        assertEquals(2, argument.getAllValues().size());
+        assertEquals(TestConst.TEST_ANSWER1, argument.getAllValues().get(0).getText());
+        assertEquals(TestConst.TEST_ANSWER2, argument.getAllValues().get(1).getText());
     }
 
     @Test

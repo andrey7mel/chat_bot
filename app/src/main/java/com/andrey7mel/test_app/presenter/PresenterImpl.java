@@ -33,7 +33,7 @@ public class PresenterImpl implements Presenter {
 
     @Override
     public void onStart() {
-
+        model.getMessages().subscribe(view::showMessage);
     }
 
     @Override
